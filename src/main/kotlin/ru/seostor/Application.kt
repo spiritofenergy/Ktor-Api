@@ -1,6 +1,7 @@
 package ru.seostor
 import com.sun.org.apache.xml.internal.security.algorithms.implementations.SignatureDSA.SHA256
 import io.ktor.server.application.*
+import io.ktor.server.routing.*
 import org.litote.kmongo.reactivestreams.KMongo
 import org.litote.kmongo.coroutine.coroutine
 import ru.seostor.data.models.MongoUserDataSource
@@ -34,6 +35,11 @@ fun Application.module() {
 
     configureMonitoring()
     configureSerialization()
-    configureSecurity()
-    configureRouting()
+    configureSecurity(tokenConfig)
+    configureRouting(
+        userDataSource = userDataSource,
+        hashingService = hashingService,
+        tokenService = tokenService,
+        tokenConfig = tokenConfig
+    )
 }

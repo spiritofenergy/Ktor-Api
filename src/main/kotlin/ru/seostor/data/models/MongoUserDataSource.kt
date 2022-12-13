@@ -2,7 +2,6 @@ package ru.seostor.data.models
 
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.eq
-import ru.seostor.data.models.responses.User
 
 class MongoUserDataSource(
     db: CoroutineDatabase
@@ -10,7 +9,7 @@ class MongoUserDataSource(
 
 
     private val users = db.getCollection<User>()
-    override suspend fun grtUserByUsername(username: String): User? =
+    override suspend fun getUserByUsername(username: String): User? =
         users.findOne(User::username eq username)
 
 
